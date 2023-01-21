@@ -1,5 +1,3 @@
-require ('dotenv').config()
-
 let weather = {
     fetchWeather: function(city) {
         ApiKey: "78add9bb3f7268c796fba3d1adfb0521",
