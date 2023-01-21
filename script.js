@@ -1,13 +1,11 @@
-/* import apiKey from "./config.js"; */
-
-let ApiKey = config.apiKey;
+require ('dotenv').config()
 
 let weather = {
     fetchWeather: function(city) {
         fetch("https://api.openweathermap.org/data/2.5/weather?q=" 
         + city 
         +"&units=metric&appid=" 
-        + this.ApiKey
+        + this.process.env.API_KEY
         )
         .then((Response) => {
             if (!Response.ok) {
