@@ -1,3 +1,5 @@
+<base target="_blank">
+
 # Basic Weather Disply Webapp with HTML, CSS and Vanilla Javascript
 
 [Check the Live Website Here](https://sammriddhgupta-weather-app.netlify.app/)
