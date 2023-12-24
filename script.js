@@ -33,6 +33,7 @@ let weather = {
 
     search: function () {
         this.fetchWeather(document.querySelector(".search-bar").value);
+        this.fetchForecast(document.querySelector(".search-bar").value);
     }
 };  
 
@@ -47,3 +48,144 @@ document.querySelector(".search-bar").addEventListener("keyup", function (event)
 });
 
 weather.fetchWeather("Denver");
+
+// fetching the forecast
+weather.fetchForecast = function(city) {
+    fetch("https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=metric&appid=" + this.apikey)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Failed to fetch forecast");
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log("API Response for Forecast:", data); 
+            this.displayForecast(data);
+        })
+        .catch(error => console.error("Error fetching forecast:", error));
+};
+
+// displaying the forecast
+
+weather.displayForecast = function(data) {
+    const dailyForecasts = data.list;
+    const uniqueDays = {};
+  
+    dailyForecasts.forEach((forecast) => {
+      const date = new Date(forecast.dt * 1000);
+      const day = date.toLocaleDateString("en-US", { weekday: "short" });
+  
+      if (!uniqueDays[day]) {
+        uniqueDays[day] = {
+          icon: forecast.weather[0].icon,
+          temp: forecast.main.temp
+        };
+      }
+    });
+  
+    const forecastContainer = document.querySelector(".forecast .forecast-container");
+    forecastContainer.innerHTML = ""; // Clear previous content
+  
+    for (const [day, { icon, temp }] of Object.entries(uniqueDays)) {
+      const iconUrl = `https://openweathermap.org/img/wn/${icon}.png`;
+      const forecastElement = `
+        <div class="forecast-item">
+          <img src="${iconUrl}" alt="${day} icon">
+          <span class="day">${day}</span>
+          <span class="temp">${temp}°C</span>
+        </div>
+      `;
+      forecastContainer.insertAdjacentHTML('beforeend', forecastElement);
+    }
+  };
+  
+  
+
+///////////////////////
+
+
+/* weather.displayForecast = function(data) {
+  const dailyForecasts = data.list.slice(0, 7); // Get next 7 days
+  const uniqueDays = dailyForecasts.filter(
+    (forecast, index, arr) =>
+      arr.findIndex((f) => new Date(f.dt * 1000).getDate() === new Date(forecast.dt * 1000).getDate()) === index
+  );
+
+  const forecastElements = [];
+  for (const forecast of uniqueDays) {
+    const day = new Date(forecast.dt * 1000).toLocaleDateString("en-US", { weekday: "short" });
+    const icon = "https://openweathermap.org/img/wn/" + forecast.weather[0].icon + ".png";
+    const temp = forecast.main.temp;
+    const element = `<img src="${icon}" alt="${forecast.weather[0].description}"><span class="day">${day.substring(0, 3)}</span><span class="temp">${temp}°C</span>`;
+    forecastElements.push(element);
+  }
+
+  const forecastContainer = document.querySelector(".forecast .forecast-container");
+  forecastContainer.innerHTML = ""; // Clear previous content
+
+  for (const element of forecastElements) {
+    const spanElement = document.createElement("span");
+    spanElement.innerHTML = element;
+    forecastContainer.appendChild(spanElement);
+  }
+}; */
+
+////////////////////
+
+/* weather.displayForecast = function(data) {
+    const dailyForecasts = data.list; // Get next 7 days
+    const uniqueDays = dailyForecasts.filter(
+      (forecast, index, arr) =>
+        arr.findIndex((f) => new Date(f.dt * 1000).getDate() === new Date(forecast.dt * 1000).getDate()) === index
+    );
+  
+    const forecastElements = [];
+    for (const forecast of uniqueDays) {
+      const day = new Date(forecast.dt * 1000).toLocaleDateString("en-US", { weekday: "short" });
+      const temp = forecast.main.temp;
+      const element = `<span class="day">${day.substring(0, 3)}</span><span class="temp">${temp}°C</span>`;
+      forecastElements.push(element);
+    }
+  
+    const forecastContainer = document.querySelector(".forecast .forecast-container");
+    forecastContainer.innerHTML = ""; // Clear previous content
+  
+    for (const element of forecastElements) {
+      const spanElement = document.createElement("span");
+      spanElement.innerHTML = element;
+      forecastContainer.appendChild(spanElement);
+    }
+  };
+   */
+
+
+
+/* weather.displayForecast = function(data) {
+    const dailyForecasts = data.list.slice(0, 7); // Get next 7 days
+    const forecastElements = []; // Empty array to store elements
+
+    for (const forecast of dailyForecasts) {
+    const day = new Date(forecast.dt * 1000).toLocaleDateString("en-US", { weekday: "short" });
+    const temp = forecast.main.temp;
+    const element = `<span class="day">${day}</span><span class="temp">${temp}°C</span>`;
+    forecastElements.push(element); // Add element to array
+    }
+
+    const forecastContainer = document.querySelector(".forecast .forecast-container");
+    forecastContainer.innerHTML = forecastElements.join(" \t "); // Append all elements at once
+
+    /* for (const forecast of dailyForecasts) {
+        const day = new Date(forecast.dt * 1000).toLocaleDateString("en-US", { weekday: "short" });
+        const icon = "https://openweathermap.org/img/wn/" + forecast.weather[0].icon + ".png";
+        const temperature = forecast.main.temp + "°C";
+
+        const forecastElement = document.createElement("div");
+        forecastElement.classList.add("forecast-item");
+        forecastElement.innerHTML = `
+            <img src="${icon}" alt="${forecast.weather[0].description}">
+            <span>${day}</span>
+            <span>${temperature}</span>
+        `; // Use template literals for correct string interpolation
+        forecastContainer.appendChild(forecastElement);
+    } 
+}; */

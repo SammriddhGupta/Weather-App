@@ -37,7 +37,7 @@ h1.temp{
 }
 
 .search{
-    display: flex;
+    display: flex ;
     align-items: center;
     justify-content: center;
     border-radius: 50%;
@@ -133,4 +133,37 @@ input.search-bar:focus {
         width: 95%; 
         padding: 1em; 
     }
+}
+
+.forecast {
+    text-align: center;
+    margin-top: 2em;
+}
+
+.forecast h2 {
+    font-size: 1.5em;
+    margin-bottom: 0.5em;
+}
+
+.forecast-container {
+    display: flex;
+    justify-content: center;
+    gap: 1em; 
+    flex-wrap: wrap;
+}
+
+.forecast-item {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 0.5em;
+    text-align: center;
+    justify-content: center;
+    width: calc(20% - 1em); /* To ensure even spacing on a row */
+    margin-bottom: 1em; /* Adjust spacing as needed */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Optional: Add a shadow effect */
+}
+
+.forecast-item img {
+    width: 50px;
+    height: 50px;
 }

@@ -5,7 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet"> <!-- importing google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet"> <!-- importing google fonts -->
 
     <!-- importing fonts awesome --> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" /> 
@@ -16,8 +18,10 @@
 
     <title>Weather App</title>
 </head>
+
 <body>
     <div class="card">
+
         <div class="search">
             <input type="text" class="search-bar" placeholder="Search Here">
             <button>     
@@ -26,15 +30,31 @@
 
         </div>
         <div class="weather loading">
-            <h2 class="city">Weather in Denver</h2>
-            <h1 class="temp">51°C</h1>
+            <h2 class="city">
+                Weather in Denver
+            </h2>
+            <h1 class="temp">
+                51°C
+            </h1>
             <div class="flex">
                 <img img src="https://openweathermap.org/img/wn/04n.png" alt="" class="icon"/>     
                 <div class="description">Cloudy</div>
             </div>
-            <div class="humidity">Humidity: 60%</div>
-            <div class="wind">Wind Speed: 6.2 km/h</div>
+            <div class="humidity">
+                Humidity: 60%
+            </div>
+            <div class="wind">
+                Wind Speed: 6.2 km/h
+            </div>
         </div>
     </div>
+
+    <div class="forecast">
+        <h2>Check upto 5-days Forecast</h2>
+        <div class="forecast-container">
+            <!--Forcast is dynamically displayed here-->
+        </div>
+    </div>
+   
 </body>
 </html>
