@@ -20,40 +20,43 @@
 </head>
 
 <body>
-    <div class="card">
+    <div class="content">
 
-        <div class="search">
-            <input type="text" class="search-bar" placeholder="Search Here">
-            <button>     
-                <i class="fa fa-light fa-magnifying-glass"></i>
-            </button>
+        <div class="card">
+            <div class="search">
+                <input type="text" class="search-bar" placeholder="Search Here">
+                <button>     
+                    <i class="fa fa-light fa-magnifying-glass"></i>
+                </button>
+    
+            </div>
+            <div class="weather loading">
+                <h2 class="city">
+                    Weather in Denver
+                </h2>
+                <h1 class="temp">
+                    51°C
+                </h1>
+                <div class="flex">
+                    <img img src="https://openweathermap.org/img/wn/04n.png" alt="" class="icon"/>     
+                    <div class="description">Cloudy</div>
+                </div>
+                <div class="humidity">
+                    Humidity: 60%
+                </div>
+                <div class="wind">
+                    Wind Speed: 6.2 km/h
+                </div>
+            </div>
+        </div>
 
-        </div>
-        <div class="weather loading">
-            <h2 class="city">
-                Weather in Denver
-            </h2>
-            <h1 class="temp">
-                51°C
-            </h1>
-            <div class="flex">
-                <img img src="https://openweathermap.org/img/wn/04n.png" alt="" class="icon"/>     
-                <div class="description">Cloudy</div>
-            </div>
-            <div class="humidity">
-                Humidity: 60%
-            </div>
-            <div class="wind">
-                Wind Speed: 6.2 km/h
+        <div class="forecast">
+            <h2>Get upto 5-days Forecast</h2>
+            <div class="forecast-container">
+                <!--Forcast is dynamically displayed here-->
             </div>
         </div>
-    </div>
 
-    <div class="forecast">
-        <h2>Check upto 5-days Forecast</h2>
-        <div class="forecast-container">
-            <!--Forcast is dynamically displayed here-->
-        </div>
     </div>
    
 </body>
