@@ -33,6 +33,7 @@ let weather = {
 
     search: function () {
         this.fetchWeather(document.querySelector(".search-bar").value);
+        this.fetchForecast(document.querySelector(".search-bar").value);
     }
 };  
 
@@ -47,3 +48,96 @@ document.querySelector(".search-bar").addEventListener("keyup", function (event)
 });
 
 weather.fetchWeather("Denver");
+
+// fetching the forecast
+weather.fetchForecast = function(city) {
+    fetch("https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=metric&appid=" + this.apikey)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Failed to fetch forecast");
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log("API Response for Forecast:", data); 
+            this.displayForecast(data);
+        })
+        .catch(error => console.error("Error fetching forecast:", error));
+};
+
+// displaying the forecast
+
+weather.displayForecast = function(data) {
+    const dailyForecasts = data.list;
+    const uniqueDays = {};
+  
+    dailyForecasts.forEach((forecast) => {
+      const date = new Date(forecast.dt * 1000);
+      const day = date.toLocaleDateString("en-US", { weekday: "short" });
+  
+      if (!uniqueDays[day]) {
+        uniqueDays[day] = {
+          icon: forecast.weather[0].icon,
+          temp: forecast.main.temp
+        };
+      }
+    });
+  
+    const forecastContainer = document.querySelector(".forecast .forecast-container");
+    forecastContainer.innerHTML = ""; // Clear previous content
+  
+    for (const [day, { icon, temp }] of Object.entries(uniqueDays)) {
+      const iconUrl = `https://openweathermap.org/img/wn/${icon}.png`;
+      const forecastElement = `
+        <div class="forecast-item">
+          <img src="${iconUrl}" alt="${day} icon">
+          <span class="day">${day}</span>
+          <span class="temp">${temp}°C</span>
+        </div>
+      `;
+      forecastContainer.insertAdjacentHTML('beforeend', forecastElement);
+    }
+  };
+
+
+// functionality for autocomplete in search bar for city names
+
+// works but weird it's showing random stuff 
+/* 
+const mykey = "78add9bb3f7268c796fba3d1adfb0521";
+
+const searchInput = document.querySelector('.search-bar');
+const suggestionsContainer = document.createElement('div');
+suggestionsContainer.classList.add('suggestions-container');
+searchInput.parentNode.appendChild(suggestionsContainer);
+
+searchInput.addEventListener('input', async function(event) {
+    const query = event.target.value;
+    const suggestions = await fetchCitySuggestions(query);
+    displaySuggestions(suggestions);
+});
+
+async function fetchCitySuggestions(query) {
+    const response = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${query}&limit=3&appid=${mykey}`);
+    const data = await response.json();
+    console.log(data);
+    return data;
+}
+
+function displaySuggestions(suggestions) {
+    suggestionsContainer.innerHTML = '';
+
+    suggestions.forEach(city => {
+        const suggestionElement = document.createElement('div');
+        suggestionElement.classList.add('suggestion');
+        suggestionElement.innerText = city.name;
+        suggestionElement.addEventListener('click', () => {
+            searchInput.value = city.name;
+            suggestionsContainer.innerHTML = '';
+            // Optionally, trigger search based on selected suggestion
+            // weather.fetchWeather(city.name);
+        });
+        suggestionsContainer.appendChild(suggestionElement);
+    });
+}
+ */
