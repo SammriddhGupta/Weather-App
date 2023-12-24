@@ -98,3 +98,46 @@ weather.displayForecast = function(data) {
       forecastContainer.insertAdjacentHTML('beforeend', forecastElement);
     }
   };
+
+
+// functionality for autocomplete in search bar for city names
+
+// works but weird it's showing random stuff 
+/* 
+const mykey = "78add9bb3f7268c796fba3d1adfb0521";
+
+const searchInput = document.querySelector('.search-bar');
+const suggestionsContainer = document.createElement('div');
+suggestionsContainer.classList.add('suggestions-container');
+searchInput.parentNode.appendChild(suggestionsContainer);
+
+searchInput.addEventListener('input', async function(event) {
+    const query = event.target.value;
+    const suggestions = await fetchCitySuggestions(query);
+    displaySuggestions(suggestions);
+});
+
+async function fetchCitySuggestions(query) {
+    const response = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${query}&limit=3&appid=${mykey}`);
+    const data = await response.json();
+    console.log(data);
+    return data;
+}
+
+function displaySuggestions(suggestions) {
+    suggestionsContainer.innerHTML = '';
+
+    suggestions.forEach(city => {
+        const suggestionElement = document.createElement('div');
+        suggestionElement.classList.add('suggestion');
+        suggestionElement.innerText = city.name;
+        suggestionElement.addEventListener('click', () => {
+            searchInput.value = city.name;
+            suggestionsContainer.innerHTML = '';
+            // Optionally, trigger search based on selected suggestion
+            // weather.fetchWeather(city.name);
+        });
+        suggestionsContainer.appendChild(suggestionElement);
+    });
+}
+ */

@@ -157,7 +157,7 @@ input.search-bar:focus {
 
 .forecast-container {
     display: grid;
-    grid-template-columns: repeat(5, minmax(60px, 1fr));
+    grid-template-columns: repeat(3, minmax(60px, 1fr));
     gap: 1em; 
     justify-content: center;
     align-items: center;
