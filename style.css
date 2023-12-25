@@ -230,6 +230,7 @@ input.search-bar:focus {
     display: flex;
     flex-direction: row;
     display: inline-flex;
+    flex-wrap: wrap;
     gap: 0.7rem;
 }
 
