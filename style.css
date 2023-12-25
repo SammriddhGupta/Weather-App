@@ -238,7 +238,7 @@ input.search-bar:focus {
     cursor: pointer;
     padding: 6px 12px;
     margin-bottom: 6px;
-    border-radius: 4px;
+    border-radius: 9px;
     background-color: #000000d0;
     transition: background-color 0.3s;
 }
