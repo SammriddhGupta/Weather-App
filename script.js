@@ -49,7 +49,7 @@ document.querySelector(".search-bar").addEventListener("keyup", function (event)
     }
 });
 
-weather.fetchWeather("Denver");
+weather.fetchWeather("Sydney");
 
 // fetching the forecast
 weather.fetchForecast = function(city) {
@@ -100,6 +100,52 @@ weather.displayForecast = function(data) {
       forecastContainer.insertAdjacentHTML('beforeend', forecastElement);
     }
   };
+
+
+// functionality for saving favourite cities
+function addToFavorites(city) {
+    let savedLocations = JSON.parse(localStorage.getItem('savedLocations')) || [];
+
+    const existingLocation = savedLocations.find(location => location.city === city);
+    if (existingLocation) {
+        alert('City already added to favorites!');
+        return;
+    }
+
+    savedLocations.push({ city });
+    localStorage.setItem('savedLocations', JSON.stringify(savedLocations));
+    displaySavedLocations();
+
+}
+
+function displaySavedLocations() {
+    let savedLocations = JSON.parse(localStorage.getItem('savedLocations')) || [];
+
+    const savedLocationsList = document.querySelector('.saved-locations');
+    savedLocationsList.innerHTML = '';
+
+    savedLocations.forEach(location => {
+        const listItem = document.createElement('li');
+        listItem.textContent = location.city;
+        listItem.classList.add('saved-location');
+
+        listItem.addEventListener('click', () => {
+            weather.fetchWeather(location.city);
+        });
+
+        savedLocationsList.appendChild(listItem);
+    });
+}
+
+// Event listener for "Add to Favorites" button (if available)
+document.querySelector(".add-to-favourites").addEventListener("click", function () {
+    const city = document.querySelector(".city").innerText.replace("Weather in ", "");;
+    addToFavorites(city);
+    displaySavedLocations();
+});
+
+// Initial display of saved locations when the app loads
+displaySavedLocations();
 
 
 // functionality for autocomplete in search bar for city names
