@@ -19,15 +19,13 @@ h1.temp{
 }
 
 .card{
+    margin: 5em auto 1em auto;
+    width: 90%;
+    max-width: 360px;
     background: #000000d0;
-
     color: white;
     padding: 2em;
     border-radius: 30px;
-    width: 90%;
-    max-width: 420px;
-    margin: 1em auto;
-
     box-shadow: 0 4px 8px 0 rgba(152, 150, 150, 0.2);
     transition: transform 0.3s ease-in-out;
 }
@@ -189,7 +187,7 @@ input.search-bar:focus {
     width: 60%;
     border: none;
     border-radius: 6px;
-    background-color: #f5fe4f;
+    background-color: #f4fb7b;
     color: rgb(0, 0, 0);
     font-weight: bold;
     cursor: pointer;
@@ -197,30 +195,29 @@ input.search-bar:focus {
 }
 
 .add-to-favourites:hover {
-    background-color: #bcff1e;
+    background-color: #fff01e;
 }
 
 /* Favorites Section */
 .favourites {
-    margin-top: 1em;
+    margin-top: 0.5em;
+    margin-bottom: 1em;
+    max-width: 800px; 
     color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
     gap: 0.2em;
-    max-width: 1200px; 
-    margin-bottom: 2em;
-
 }
 
 .favourites h2 {
-    margin: 0.5em auto;
-    background-color: rgba(0, 0, 0, 0.7); 
+    margin: 0.2em auto;
     padding: 0.5em 0.5em;
+    max-width: 100%;
+    background-color: rgba(0, 0, 0, 0.7); 
     border-radius: 15px; 
     text-align: center;
-    max-width: 400px;
 }
 
 /* saved-locations is the unordered list container */
@@ -254,4 +251,21 @@ input.search-bar:focus {
 .saved-location.active {
     background-color: rgb(74, 139, 10);
     border: 2px solid #0069c5;
+}
+
+.clear-favorites {
+    margin-top: 0.5em;
+    padding: 8px 16px;
+    width: 40%;
+    border: none;
+    border-radius: 6px;
+    background-color: #ff4f4f;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.clear-favorites:hover {
+    background-color: #ff0000;
 }

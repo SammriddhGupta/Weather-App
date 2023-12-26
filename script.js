@@ -155,6 +155,7 @@ document.querySelector(".add-to-favourites").addEventListener("click", function 
 // Initial display of saved locations when the app loads
 displaySavedLocations();
 
+////////////////////////////////////////////////////////
 // Function to handle the click event for saved locations
 function handleCitySelection(cityItem) {
     const allCityItems = document.querySelectorAll('.saved-location');
@@ -183,3 +184,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+// Function to clear all saved favorites
+function clearFavorites() {
+    localStorage.removeItem('savedLocations');
+    displaySavedLocations(); // Refresh the displayed list
+}
+
+// Event listener for the "Clear Favorites" button
+document.querySelector('.clear-favorites').addEventListener('click', clearFavorites);
