@@ -223,7 +223,7 @@ input.search-bar:focus {
 /* saved-locations is the unordered list container */
 .saved-locations {
     list-style: none;
-    margin: 1rem;
+    margin: 0.1rem;
     padding: 0.5rem;
     display: flex;
     flex-direction: row;
@@ -255,7 +255,7 @@ input.search-bar:focus {
 
 .clear-favorites {
     margin-top: 0.5em;
-    padding: 8px 16px;
+    padding: 8px;
     width: 40%;
     border: none;
     border-radius: 6px;
