@@ -2,8 +2,6 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    /* this might be causing problems, need to investigate */
-    height: 110vh;
     margin: 0;
     padding: 0;
     background: #222;
@@ -216,7 +214,7 @@ input.search-bar:focus {
 
 }
 
-.favourites h3 {
+.favourites h2 {
     margin: 0.5em auto;
     background-color: rgba(0, 0, 0, 0.7); 
     padding: 0.5em 0.5em;
@@ -249,6 +247,11 @@ input.search-bar:focus {
 }
 
 .saved-location:hover {
-    background-color: #605f5f4d;
+    background-color: #4e24244d;
     transform: scale(1.1); 
+}
+
+.saved-location.active {
+    background-color: rgb(74, 139, 10);
+    border: 2px solid #0069c5;
 }

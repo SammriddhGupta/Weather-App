@@ -49,8 +49,10 @@ document.querySelector(".search-bar").addEventListener("keyup", function (event)
     }
 });
 
+// default weather display
 weather.fetchWeather("Sydney");
 
+//////////////////////////////////////////////////////
 // fetching the forecast
 weather.fetchForecast = function(city) {
     fetch("https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=metric&appid=" + this.apikey)
@@ -101,7 +103,9 @@ weather.displayForecast = function(data) {
     }
   };
 
+weather.fetchForecast("Sydney");
 
+///////////////////////////////////////////////////////
 // functionality for saving favourite cities
 function addToFavorites(city) {
     let savedLocations = JSON.parse(localStorage.getItem('savedLocations')) || [];
@@ -150,3 +154,32 @@ document.querySelector(".add-to-favourites").addEventListener("click", function 
 
 // Initial display of saved locations when the app loads
 displaySavedLocations();
+
+// Function to handle the click event for saved locations
+function handleCitySelection(cityItem) {
+    const allCityItems = document.querySelectorAll('.saved-location');
+
+    // Remove the 'active' class from all city items
+    allCityItems.forEach(item => {
+        item.classList.remove('active');
+    });
+
+    // Add the 'active' class to the clicked city item
+    cityItem.classList.add('active');
+}
+
+// Event listener for saved locations
+document.addEventListener('DOMContentLoaded', () => {
+    const allCityItems = document.querySelectorAll('.saved-location');
+
+    allCityItems.forEach(cityItem => {
+        cityItem.addEventListener('click', function () {
+            handleCitySelection(cityItem);
+
+            const cityName = cityItem.textContent;
+            weather.fetchWeather(cityName);
+            weather.fetchForecast(cityName);
+            document.querySelector('.search-bar').value = cityName;
+        });
+    });
+});
