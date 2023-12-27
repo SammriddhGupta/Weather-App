@@ -34,32 +34,36 @@ let weather = {
         document.body.style.backgroundImage = "url('https://source.unsplash.com/1600x900/?" + name + "')";
 
         // toggle button
-        const toggleUnitsButton = document.querySelector('.toggle-units');
-        toggleUnitsButton.addEventListener('click', () => {
-        this.toggleUnits(tempCelsius, feelsLikeCelsius);
-    });
+        const toggleInput = document.querySelector('#toggle');
+
+        toggleInput.addEventListener('input', () => {
+            this.toggleUnits();
+        });
 
     },
 
-    search: function () {
-        this.fetchWeather(document.querySelector(".search-bar").value);
-        this.fetchForecast(document.querySelector(".search-bar").value);
-    }, 
-
     toggleUnits: function() {
         const tempElements = document.querySelectorAll('.temp');
+
         tempElements.forEach(element => {
         const currentTemp = element.innerText;
         const isCelsius = currentTemp.includes('°C');
         if (isCelsius) {
             const tempInFahrenheit = (parseFloat(currentTemp) * 9) / 5 + 32;
             element.innerText = tempInFahrenheit.toFixed(1) + '°F';
-        } else {
+        } 
+        else {
             const tempInCelsius = ((parseFloat(currentTemp) - 32) * 5) / 9;
             element.innerText = tempInCelsius.toFixed(1) + '°C';
         }
     });
+    },
+
+    search: function () {
+        this.fetchWeather(document.querySelector(".search-bar").value);
+        this.fetchForecast(document.querySelector(".search-bar").value);
     }
+    
 };  
 
 document.querySelector(".search button").addEventListener("click", function () {
