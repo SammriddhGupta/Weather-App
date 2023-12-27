@@ -20,22 +20,45 @@ let weather = {
         const { name } = data;
         const { icon, description } = data.weather[0];
         const { temp, feels_like, humidity } = data.main;
-        // add feels-like 
         const { speed }  = data.wind;
+        const tempCelsius = temp;
+        const feelsLikeCelsius = feels_like;
+
         document.querySelector(".city").innerText = "Weather in "+name;
         document.querySelector(".icon").src = "https://openweathermap.org/img/wn/" + icon + ".png";
         document.querySelector(".description").innerText = description;
-        document.querySelector(".temp").innerText = temp + "°C";
-        document.querySelector(".feels-like").innerText = "Feels Like: " + feels_like + "°C";
+        document.querySelector(".temp").innerText = tempCelsius + "°C";
         document.querySelector(".humidity").innerText = "Humidity: " + humidity + "%";
         document.querySelector(".wind").innerText = "Wind Speed: " + speed + " m/s";
         document.querySelector(".weather").classList.remove("loading");
         document.body.style.backgroundImage = "url('https://source.unsplash.com/1600x900/?" + name + "')";
+
+        // toggle button
+        const toggleUnitsButton = document.querySelector('.toggle-units');
+        toggleUnitsButton.addEventListener('click', () => {
+        this.toggleUnits(tempCelsius, feelsLikeCelsius);
+    });
+
     },
 
     search: function () {
         this.fetchWeather(document.querySelector(".search-bar").value);
         this.fetchForecast(document.querySelector(".search-bar").value);
+    }, 
+
+    toggleUnits: function() {
+        const tempElements = document.querySelectorAll('.temp');
+        tempElements.forEach(element => {
+        const currentTemp = element.innerText;
+        const isCelsius = currentTemp.includes('°C');
+        if (isCelsius) {
+            const tempInFahrenheit = (parseFloat(currentTemp) * 9) / 5 + 32;
+            element.innerText = tempInFahrenheit.toFixed(1) + '°F';
+        } else {
+            const tempInCelsius = ((parseFloat(currentTemp) - 32) * 5) / 9;
+            element.innerText = tempInCelsius.toFixed(1) + '°C';
+        }
+    });
     }
 };  
 
