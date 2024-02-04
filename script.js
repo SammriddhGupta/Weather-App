@@ -1,4 +1,5 @@
 let weather = {
+    // bad practice in real world, never expose your API key (this is just a practice project, so it's fine since it's a free rate-limited API key anyway)
     apikey: "78add9bb3f7268c796fba3d1adfb0521",
     fetchWeather: function(city) {
         fetch("https://api.openweathermap.org/data/2.5/weather?q=" 
