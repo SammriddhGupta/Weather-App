@@ -1,5 +1,7 @@
 body{
     display: flex;
+    min-height: 100dvh;
+    min-width: 100dvw;
     justify-content: center;
     align-items: center;
     margin: 0;
@@ -134,6 +136,13 @@ input.search-bar:focus {
     .card {
         width: 75%; 
         padding: 1.5em; 
+    }
+}
+
+@media screen and (max-width: 480px) { 
+    /* mobile */ 
+    body {
+        height: 100%;  
     }
 }
 
